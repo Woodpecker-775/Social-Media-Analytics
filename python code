@@ -1,0 +1,30 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+
+def auto_login(url, username, password):
+    # Initialize the Chrome driver
+    driver = webdriver.Chrome()  # Make sure to have the chromedriver in your PATH
+    driver.get(url)  # Open the specified URL
+
+    # Locate the username and password fields and the login button
+    username_input = driver.find_element(By.ID, 'username')  # Change 'username' to the actual name attribute
+    password_input = driver.find_element(By.ID, 'password')  # Change 'password' to the actual name attribute
+    login_button = driver.find_element(By.ID, 'loginbtn')  # Change 'login' to the actual name attribute
+
+    # Enter the credentials
+    username_input.send_keys(username)
+    password_input.send_keys(password)
+    login_button.click()  # Click the login button
+
+    # Optional: Wait for a few seconds to see the result
+    time.sleep(5)
+    driver.quit()  # Close the browser
+
+# Get user input for URL, username, and password
+url = input("Enter the URL of the login page: ")
+username = input("Enter your username: ")
+password = input("Enter your password: ")
+
+# Call the auto_login function with the user-provided inputs
+auto_login(url, username, password)
